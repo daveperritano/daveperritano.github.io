@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="Communications & marketing portfolio -- broadcast news, public affairs, and brand marketing leadership.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%93%B0</text></svg>">
@@ -28,10 +29,11 @@
     --card-paper:#f7f4e9;
     --shadow: 0 18px 40px -20px rgba(11,18,32,0.35);
 
-    /* Role tokens that flip with the theme.
-       The --ink-* and --paper-* tokens above are fixed brand colors used by the
-       permanently dark sections (masthead, ticker, rundown, sign-off); they must
-       NOT be redefined for dark mode or text using them goes dark-on-dark. */
+    /* Role tokens, kept separate from the --ink-* / --paper-* brand colors so a
+       colour change can never land a text colour on a background of the same
+       value. The --ink-* tokens paint the permanently dark sections (masthead,
+       ticker, rundown, sign-off) and must not be reused as text colours on the
+       paper background. */
     --heading:#0b1220;      /* headings sitting on the paper background */
     --surface-alt:#f7f4e9;  /* the tinted band behind the quotes section */
     --label:#6b6449;        /* small mono labels / captions on paper */
@@ -39,7 +41,11 @@
   }
 
   *{box-sizing:border-box;}
-  html{color-scheme:light dark;}
+  /* The design is a fixed light newsprint palette: there is no dark variant.
+     Declaring color-scheme:light keeps form controls and scrollbars light AND
+     opts the page out of Chrome-on-Android's "Auto Dark Theme", which otherwise
+     force-inverts sites that don't state a preference. */
+  html{color-scheme:light;}
   body{
     margin:0;
     background:var(--paper);
@@ -427,37 +433,15 @@
     .quote-grid{grid-template-columns:1fr;}
   }
 
-  /* ===== dark mode =====
-     Only the role tokens flip here. --ink-900/800/700 and --paper-hi /
-     --paper-text stay fixed: they paint the permanently dark sections and the
-     light text sitting on top of them. Overriding them for dark mode is what
-     previously turned every heading and job title into dark-on-dark. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#151c18;
-      --surface-alt:#1b231e;
-      --card-paper:#222b25;
-      --ink-text:#ece7d6;
-      --ink-text-soft:#c2bca8;
-      --heading:#f2ede0;
-      --label:#a8a08a;
-      --red-ink:#e2796a;
-      --rule:#3f4a43;
-      --shadow: 0 18px 40px -22px rgba(0,0,0,0.7);
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#151c18;
-    --surface-alt:#1b231e;
-    --card-paper:#222b25;
-    --ink-text:#ece7d6;
-    --ink-text-soft:#c2bca8;
-    --heading:#f2ede0;
-    --label:#a8a08a;
-    --red-ink:#e2796a;
-    --rule:#3f4a43;
-    --shadow: 0 18px 40px -22px rgba(0,0,0,0.7);
-  }
+  /* ===== no dark mode =====
+     Deliberately omitted. This page is a newsprint design and always renders in
+     the light palette, on every device, whatever the reader's system setting.
+     The opt-out lives in two places: color-scheme:light on <html> above, and the
+     <meta name="color-scheme" content="light"> in <head>, which applies before
+     the CSS parses. Do not add a prefers-color-scheme block back without also
+     adding light text tokens for the paper background: --heading, --label and
+     --red-ink are all dark values meant for cream, and the --ink-* tokens are
+     dark backgrounds, so simply inverting the palette hides half the copy. */
 </style>
 </head>
 <body>
