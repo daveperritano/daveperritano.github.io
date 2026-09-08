@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
 <meta name="description" content="Communications & marketing portfolio -- broadcast news, public affairs, and brand marketing leadership.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%93%B0</text></svg>">
 <title>David Perritano</title>
@@ -26,10 +27,19 @@
     --rule-dark:#2a3752;
     --card-paper:#f7f4e9;
     --shadow: 0 18px 40px -20px rgba(11,18,32,0.35);
+
+    /* Role tokens that flip with the theme.
+       The --ink-* and --paper-* tokens above are fixed brand colors used by the
+       permanently dark sections (masthead, ticker, rundown, sign-off); they must
+       NOT be redefined for dark mode or text using them goes dark-on-dark. */
+    --heading:#0b1220;      /* headings sitting on the paper background */
+    --surface-alt:#f7f4e9;  /* the tinted band behind the quotes section */
+    --label:#6b6449;        /* small mono labels / captions on paper */
+    --red-ink:#b23a2e;      /* wire red used as TEXT (not as a fill) */
   }
 
   *{box-sizing:border-box;}
-  html{color-scheme:light;}
+  html{color-scheme:light dark;}
   body{
     margin:0;
     background:var(--paper);
@@ -57,10 +67,14 @@
     font-size:12px;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--wire-red);
+    color:var(--red-ink);
     font-weight:600;
   }
   .on-ink .eyebrow{color:var(--gold-hi);}
+  /* These sections are dark in both themes, so the red needs to be the bright
+     one regardless of the user's color scheme. */
+  .rundown .eyebrow,
+  .signoff .eyebrow{color:#e2796a;}
 
   /* ===== masthead ===== */
   .masthead{
@@ -192,7 +206,7 @@
     grid-template-columns:2fr 1fr;
     gap:52px;
   }
-  .lede h2{font-size:36px;color:var(--ink-900);margin-bottom:18px;}
+  .lede h2{font-size:36px;color:var(--heading);margin-bottom:18px;}
   .lede p{font-size:18px;line-height:1.7;color:var(--ink-text-soft);margin:0 0 16px;}
   .lede p:first-of-type::first-letter{
     font-family:'Big Shoulders Display',sans-serif;
@@ -201,7 +215,7 @@
     float:left;
     line-height:0.8;
     padding:6px 10px 0 0;
-    color:var(--wire-red);
+    color:var(--red-ink);
   }
   .sidebox{
     background:var(--card-paper);
@@ -213,11 +227,11 @@
     font-family:'IBM Plex Mono',monospace;
     letter-spacing:0.1em;
     text-transform:uppercase;
-    color:var(--wire-red);
+    color:var(--red-ink);
     margin-bottom:14px;
   }
   .sidebox dl{margin:0;}
-  .sidebox dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8262;margin-top:14px;}
+  .sidebox dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label);margin-top:14px;}
   .sidebox dt:first-child{margin-top:0;}
   .sidebox dd{margin:2px 0 0;font-size:15px;color:var(--ink-text);}
 
@@ -255,13 +269,13 @@
   .job-points li::before{
     content:"—";
     position:absolute;left:0;top:0;
-    color:var(--wire-red);
+    color:#e2796a;
   }
   .job-points b{color:var(--gold-hi);font-weight:600;}
 
   /* ===== dispatches / featured work ===== */
-  .dispatches h2{font-size:36px;color:var(--ink-900);}
-  .dispatches .section-sub{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#7d7658;margin-top:8px;margin-bottom:38px;}
+  .dispatches h2{font-size:36px;color:var(--heading);}
+  .dispatches .section-sub{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--label);margin-top:8px;margin-bottom:38px;}
 
   .card-grid{
     display:grid;
@@ -289,10 +303,10 @@
     font-size:11px;
     letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--wire-red);
+    color:var(--red-ink);
     margin-bottom:10px;
   }
-  .card h3{font-size:22px;color:var(--ink-900);line-height:1.15;margin-bottom:10px;}
+  .card h3{font-size:22px;color:var(--heading);line-height:1.15;margin-bottom:10px;}
   .card p{font-size:15px;line-height:1.6;color:var(--ink-text-soft);margin:0;flex:1;}
   .card-stat{
     margin-top:16px;
@@ -300,14 +314,14 @@
     border-top:1px dashed var(--rule);
     font-family:'IBM Plex Mono',monospace;
     font-size:13px;
-    color:#8a8262;
+    color:var(--label);
   }
-  .card-stat b{color:var(--wire-red);font-size:16px;}
+  .card-stat b{color:var(--red-ink);font-size:16px;}
 
   /* ===== recommendations ===== */
-  .otr{background:var(--paper-hi);}
-  .otr h2{font-size:36px;color:var(--ink-900);}
-  .otr .section-sub{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#7d7658;margin-top:8px;margin-bottom:38px;max-width:620px;line-height:1.6;}
+  .otr{background:var(--surface-alt);}
+  .otr h2{font-size:36px;color:var(--heading);}
+  .otr .section-sub{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--label);margin-top:8px;margin-bottom:38px;max-width:620px;line-height:1.6;}
   .quote-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -339,7 +353,7 @@
     font-family:'IBM Plex Mono',monospace;
     font-size:12px;
     letter-spacing:0.04em;
-    color:#8a8262;
+    color:var(--label);
     text-transform:uppercase;
     border-top:1px solid var(--rule);
     padding-top:12px;
@@ -351,7 +365,7 @@
     grid-template-columns:1.3fr 1fr;
     gap:44px;
   }
-  .index h2{font-size:30px;color:var(--ink-900);margin-bottom:22px;}
+  .index h2{font-size:30px;color:var(--heading);margin-bottom:22px;}
   .chip-group{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px;}
   .chip{
     font-family:'IBM Plex Mono',monospace;
@@ -371,7 +385,7 @@
   }
   .misc-list li:last-child{border-bottom:1px solid var(--rule);}
   .misc-list .k{color:var(--ink-text-soft);}
-  .misc-list .v{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-900);text-align:right;}
+  .misc-list .v{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--heading);text-align:right;}
 
   /* ===== sign-off / footer ===== */
   .signoff{
@@ -413,30 +427,36 @@
     .quote-grid{grid-template-columns:1fr;}
   }
 
-  /* ===== dark mode ===== */
+  /* ===== dark mode =====
+     Only the role tokens flip here. --ink-900/800/700 and --paper-hi /
+     --paper-text stay fixed: they paint the permanently dark sections and the
+     light text sitting on top of them. Overriding them for dark mode is what
+     previously turned every heading and job title into dark-on-dark. */
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#141b17;
-      --paper-hi:#1b241f;
-      --card-paper:#1b241f;
-      --ink-text:#e7e2d2;
-      --ink-text-soft:#b9b3a0;
-      --rule:#3a4038;
-      --ink-900:#080d18;
-      --ink-800:#0d1526;
-      --ink-700:#131f34;
+      --paper:#151c18;
+      --surface-alt:#1b231e;
+      --card-paper:#222b25;
+      --ink-text:#ece7d6;
+      --ink-text-soft:#c2bca8;
+      --heading:#f2ede0;
+      --label:#a8a08a;
+      --red-ink:#e2796a;
+      --rule:#3f4a43;
+      --shadow: 0 18px 40px -22px rgba(0,0,0,0.7);
     }
   }
   :root[data-theme="dark"]{
-    --paper:#141b17;
-    --paper-hi:#1b241f;
-    --card-paper:#1b241f;
-    --ink-text:#e7e2d2;
-    --ink-text-soft:#b9b3a0;
-    --rule:#3a4038;
-    --ink-900:#080d18;
-    --ink-800:#0d1526;
-    --ink-700:#131f34;
+    --paper:#151c18;
+    --surface-alt:#1b231e;
+    --card-paper:#222b25;
+    --ink-text:#ece7d6;
+    --ink-text-soft:#c2bca8;
+    --heading:#f2ede0;
+    --label:#a8a08a;
+    --red-ink:#e2796a;
+    --rule:#3f4a43;
+    --shadow: 0 18px 40px -22px rgba(0,0,0,0.7);
   }
 </style>
 </head>
